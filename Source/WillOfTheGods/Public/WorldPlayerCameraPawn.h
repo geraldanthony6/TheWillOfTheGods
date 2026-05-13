@@ -29,22 +29,16 @@ protected:
 	TObjectPtr<UCameraComponent> WorldPlayerCameraComponent;
 	
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<UInputAction> ForwardBackwardAction;
+	TObjectPtr<UInputAction> MoveAction;
 	
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<UInputAction> LeftRightAction;
-	
-	UPROPERTY(EditAnywhere)
-	TObjectPtr<UInputAction> UpDownAction;
+	TObjectPtr<UInputAction> LookAction;
 	
 	UFUNCTION()
 	void OnMoveAction(const FInputActionValue& Value);
 	
 	UFUNCTION()
-	void OnLeftRight();
-	
-	UFUNCTION()
-	void OnUpDown();
+	void OnLookAction(const FInputActionValue& Value);
 
 public:	
 	// Called every frame

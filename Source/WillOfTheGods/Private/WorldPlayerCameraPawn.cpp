@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "WorldPlayerCameraPawn.h"
+#include "Public/WorldPlayerCameraPawn.h"
 
 #include "EnhancedInputComponent.h"
 
@@ -30,7 +30,7 @@ void AWorldPlayerCameraPawn::OnMoveAction(const FInputActionValue& Value)
 {
 	FVector InputVector = Value.Get<FVector>();
 	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("X: %f Y: %f Z: %f"), InputVector.X, InputVector.Y, InputVector.Z));
-	/*if (InputVector.X > 0.0f)
+	if (InputVector.X > 0.0f)
 	{
 		FVector ActorLocation = GetActorLocation();
 		SetActorLocation(ActorLocation + (GetActorForwardVector() * 100.0f));	
@@ -53,23 +53,21 @@ void AWorldPlayerCameraPawn::OnMoveAction(const FInputActionValue& Value)
 	if (InputVector.Z > 0.0f)
 	{
 		FVector ActorLocation = GetActorLocation();
-		SetActorLocation(ActorLocation + (GetActorRightVector() * 100.0f));	
+		SetActorLocation(ActorLocation + (GetActorUpVector() * 100.0f));	
 	} else if (InputVector.Z < 0.0f)
 	{
 		FVector ActorLocation = GetActorLocation();
-		SetActorLocation(ActorLocation + (GetActorRightVector() * -100.0f));	
-	}*/
+		SetActorLocation(ActorLocation + (GetActorUpVector() * -100.0f));	
+	}
 
 }
 
-void AWorldPlayerCameraPawn::OnLeftRight()
+void AWorldPlayerCameraPawn::OnLookAction(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, "LeftRight");
-}
-
-void AWorldPlayerCameraPawn::OnUpDown()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, "UpDown");
+	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("X: %f Y: %f"), LookAxisVector.X, LookAxisVector.Y));
+	AddControllerYawInput(LookAxisVector.X);
+	AddControllerPitchInput(LookAxisVector.Y * -1.0f);
 }
 
 // Called every frame
@@ -86,7 +84,8 @@ void AWorldPlayerCameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
-		EnhancedInputComponent->BindAction(ForwardBackwardAction, ETriggerEvent::Triggered, this, &AWorldPlayerCameraPawn::OnMoveAction);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AWorldPlayerCameraPawn::OnMoveAction);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AWorldPlayerCameraPawn::OnLookAction);
 	}
 	
 }
