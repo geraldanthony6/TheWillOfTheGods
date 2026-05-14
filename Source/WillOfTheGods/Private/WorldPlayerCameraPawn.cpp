@@ -16,7 +16,6 @@ AWorldPlayerCameraPawn::AWorldPlayerCameraPawn()
 	
 	WorldPlayerCameraComponent = CreateDefaultSubobject<UCameraComponent>(FName("WorldPlayerCamera"));
 	WorldPlayerCameraComponent->SetupAttachment(CameraBoom);
-	
 }
 
 // Called when the game starts or when spawned
@@ -29,7 +28,7 @@ void AWorldPlayerCameraPawn::BeginPlay()
 void AWorldPlayerCameraPawn::OnMoveAction(const FInputActionValue& Value)
 {
 	FVector InputVector = Value.Get<FVector>();
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("X: %f Y: %f Z: %f"), InputVector.X, InputVector.Y, InputVector.Z));
+	//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("X: %f Y: %f Z: %f"), InputVector.X, InputVector.Y, InputVector.Z));
 	if (InputVector.X > 0.0f)
 	{
 		FVector ActorLocation = GetActorLocation();
@@ -59,13 +58,12 @@ void AWorldPlayerCameraPawn::OnMoveAction(const FInputActionValue& Value)
 		FVector ActorLocation = GetActorLocation();
 		SetActorLocation(ActorLocation + (GetActorUpVector() * -100.0f));	
 	}
-
 }
 
 void AWorldPlayerCameraPawn::OnLookAction(const FInputActionValue& Value)
 {
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("X: %f Y: %f"), LookAxisVector.X, LookAxisVector.Y));
+	//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, FString::Printf(TEXT("X: %f Y: %f"), LookAxisVector.X, LookAxisVector.Y));
 	AddControllerYawInput(LookAxisVector.X);
 	AddControllerPitchInput(LookAxisVector.Y * -1.0f);
 }

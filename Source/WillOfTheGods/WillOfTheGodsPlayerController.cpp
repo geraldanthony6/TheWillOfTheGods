@@ -46,7 +46,7 @@ void AWillOfTheGodsPlayerController::SetupInputComponent()
 		// Set up action bindings
 		if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 		{
-			// Setup mouse input events
+			/*// Setup mouse input events
 			EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Started, this, &AWillOfTheGodsPlayerController::OnInputStarted);
 			EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Triggered, this, &AWillOfTheGodsPlayerController::OnSetDestinationTriggered);
 			EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Completed, this, &AWillOfTheGodsPlayerController::OnSetDestinationReleased);
@@ -56,7 +56,7 @@ void AWillOfTheGodsPlayerController::SetupInputComponent()
 			EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Started, this, &AWillOfTheGodsPlayerController::OnInputStarted);
 			EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Triggered, this, &AWillOfTheGodsPlayerController::OnTouchTriggered);
 			EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Completed, this, &AWillOfTheGodsPlayerController::OnTouchReleased);
-			EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AWillOfTheGodsPlayerController::OnTouchReleased);
+			EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AWillOfTheGodsPlayerController::OnTouchReleased);*/
 		}
 		else
 		{
