@@ -7,6 +7,7 @@
 #include "AI/NavigationSystemBase.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Navigation/PathFollowingComponent.h"
+#include "BaseWorldNode.h"
 
 class UNavigationSystemV1;
 // Sets default values
@@ -35,6 +36,15 @@ void APlayerWorldPawn::Move(FVector TargetLocation)
 		DesiredLocation = TargetLocation;
 		bPlayerMovementEnabled = true;
 	}
+}
+
+void APlayerWorldPawn::SetupPlayerOnNewNode(ABaseWorldNode* NewNode)
+{
+	// Move to new node
+	Move(NewNode->GetActorLocation());
+	
+	// Once we reach the new node display the information for that node in the HUD
+	PlayerWorldHUD->SetNodeInformation(NewNode->GetNodeData().NodeName, NewNode->GetNodeData().NodeDescription);
 }
 
 // Called when the game starts or when spawned

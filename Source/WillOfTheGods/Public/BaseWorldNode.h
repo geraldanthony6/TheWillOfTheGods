@@ -7,6 +7,20 @@
 #include "GameFramework/Actor.h"
 #include "BaseWorldNode.generated.h"
 
+USTRUCT(BlueprintType)
+struct FNodeData
+{
+	GENERATED_BODY()
+	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText NodeName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText NodeDescription;
+	
+};
+
 UCLASS()
 class WILLOFTHEGODS_API ABaseWorldNode : public AActor
 {
@@ -30,6 +44,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player References")
 	TObjectPtr<APlayerWorldPawn> PlayerWorldPawn;
 	
+	UPROPERTY(EditAnywhere)
+	FNodeData NodeData;
+	
 	// Functions
 	UFUNCTION()
 	void OnClicked(UPrimitiveComponent* TouchedActor, FKey ButtonPressed);
@@ -37,5 +54,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	// Functions
+	UFUNCTION()
+	FNodeData GetNodeData(){return NodeData;}
 
 };

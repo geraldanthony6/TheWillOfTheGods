@@ -26,7 +26,7 @@ void ABaseWorldNode::OnClicked(UPrimitiveComponent* TouchedActor, FKey ButtonPre
 {
 	UE_LOG(LogTemp, Warning, TEXT("Clicked node"));
 	
-	PlayerWorldPawn->Move(GetActorLocation());
+	PlayerWorldPawn->SetupPlayerOnNewNode(this);
 }
 
 // Called every frame

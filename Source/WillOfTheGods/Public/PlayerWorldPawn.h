@@ -4,9 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "PlayerWorldHUD.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/Pawn.h"
 #include "PlayerWorldPawn.generated.h"
+
+class UBaseWorld;
 
 UCLASS()
 class WILLOFTHEGODS_API APlayerWorldPawn : public APawn
@@ -16,11 +19,11 @@ class WILLOFTHEGODS_API APlayerWorldPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	APlayerWorldPawn();
-
-protected:
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+
+protected:
 	// Variables
 	UPROPERTY()
 	TObjectPtr<USceneComponent> Root;
@@ -30,6 +33,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UFloatingPawnMovement> PlayerMovementComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<UPlayerWorldHUD> PlayerWorldHUD;
 	
 	UPROPERTY(EditAnywhere)
 	bool bPlayerMovementEnabled;
@@ -47,5 +53,8 @@ public:
 
 	UFUNCTION()
 	void Move(FVector TargetLocation);
+	
+	UFUNCTION()
+	void SetupPlayerOnNewNode(ABaseWorldNode* NewNode);
 	
 };
